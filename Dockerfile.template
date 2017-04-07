@@ -1,0 +1,19 @@
+# Base image
+FROM resin/%%RESIN_MACHINE_NAME%%-python:2.7
+
+#switch on systemd init system in container
+ENV INITSYSTEM on
+
+RUN apt-get update && apt-get install -y python-picamera
+
+ADD requirements.txt ./
+RUN pip install -r requirements.txt
+
+WORKDIR /
+
+RUN mkdir /cameratrap
+COPY cameratrap /cameratrap
+COPY ./start.sh /
+COPY ./supervisord.conf /etc/
+
+CMD ["/bin/bash", "/start.sh"]
