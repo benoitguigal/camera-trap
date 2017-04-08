@@ -1,3 +1,4 @@
 gpiozero==1.3.2
 requests==2.13
+RPi.GPIO
 supervisor==3.3.1
