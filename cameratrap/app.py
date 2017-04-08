@@ -20,7 +20,7 @@ class App(object):
         self.infrared_sensor.when_activated = self.when_infrared_sensor_is_activated
         self.camera = Camera()
 
-    def when_infrared_sensor_is_activated(self):
+    def when_infrared_sensor_is_activated(self, _):
         logger.info("Infrared sensor activated")
         self.camera.capture()
         time.sleep(3)
