@@ -7,13 +7,11 @@ import RPi.GPIO as GPIO
 import picamera
 
 
-logger = logging.getLogger(__name__)
-
 camera = picamera.PiCamera()
 
 
 def callback_up(channel):
-    logger.info("We detected something !")
+    print("We detected something !")
     now = datetime.now()
     filepath = "/mnt/storage/%s.jpg" % str(now)
     camera.capture(filepath)
@@ -23,14 +21,14 @@ def callback_up(channel):
 class App(object):
 
     def start(self):
-        logger.info("Starting app")
+        print("Starting app")
         pin_number = 4
         GPIO.setmode(GPIO. BCM)
         GPIO.setup(pin_number, GPIO.IN)
         GPIO.add_event_detect(pin_number, GPIO.RISING, callback=callback_up)
 
     def stop(self):
-        logger.info("Bye Bye")
+        print("Bye Bye")
 
 
 
