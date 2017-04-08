@@ -1,0 +1,11 @@
+[Unit]
+Description = External USB stick storage
+
+[Mount]
+What = LABEL=my-usb-stick
+Where = /mnt/storage
+Type = ext4
+Options = rw,relatime,data=ordered
+
+[Install]
+WantedBy = multi-user.target
