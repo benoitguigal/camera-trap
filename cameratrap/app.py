@@ -1,34 +1,33 @@
 # -*- coding: utf8 -*-
 import logging
+from datetime import datetime
 import time
-import signal
 
-from .devices.sensors import InfraredSensor
-from .devices.camera import Camera
+import RPi.GPIO as GPIO
+import picamera
+
 
 logger = logging.getLogger(__name__)
+
+camera = picamera.PiCamera()
+
+
+def callback_up(channel):
+    logger.info("We detected something !")
+    now = datetime.now()
+    filepath = "/mnt/storage/%s.jpg" % str(now)
+    camera.capture(filepath)
+    time.sleep(5)
 
 
 class App(object):
 
-    def __init__(self):
-        self.infrared_sensor = None
-        self.camera = None
-
-    def initialize_devices(self):
-        self.infrared_sensor = InfraredSensor()
-        self.infrared_sensor.when_activated = self.when_infrared_sensor_is_activated
-        self.camera = Camera()
-
-    def when_infrared_sensor_is_activated(self, _):
-        logger.info("Infrared sensor activated")
-        self.camera.capture()
-        time.sleep(3)
-
     def start(self):
         logger.info("Starting app")
-        self.initialize_devices()
-        signal.pause()
+        pin_number = 4
+        GPIO.setmode(GPIO. BCM)
+        GPIO.setup(pin_number, GPIO.IN)
+        GPIO.add_event_detect(pin_number, GPIO.RISING, callback=callback_up)
 
     def stop(self):
         logger.info("Bye Bye")
