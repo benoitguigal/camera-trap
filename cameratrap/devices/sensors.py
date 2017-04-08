@@ -12,10 +12,9 @@ class InfraredSensor(object):
 
     def __init__(self):
         self._when_activated = None
-        pin_number = 4
+        self.pin_number = 4
         GPIO.setmode(GPIO. BCM)
-        GPIO.setup(pin_number, GPIO.IN)
-        GPIO.add_event_detect(pin_number, GPIO.RISING, callback=self.when_activated)
+        GPIO.setup(self.pin_number, GPIO.IN)
 
     @property
     def when_activated(self):
@@ -24,6 +23,7 @@ class InfraredSensor(object):
     @when_activated.setter
     def when_activated(self, value):
         self._when_activated = self._wrap_callback(value)
+        GPIO.add_event_detect(self.pin_number, GPIO.RISING, callback=self.when_activated)
 
     def _wrap_callback(self, fn):
         if fn is None:
