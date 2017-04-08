@@ -14,7 +14,6 @@ WORKDIR /
 RUN mkdir /cameratrap
 COPY cameratrap /cameratrap
 COPY ./start.sh /
-COPY ./supervisord.conf /etc/
 
 COPY mnt-storage.mount /etc/systemd/system/
 RUN systemctl enable mnt-storage.mount
