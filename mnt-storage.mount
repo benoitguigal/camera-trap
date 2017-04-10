@@ -2,9 +2,9 @@
 Description = External USB stick storage
 
 [Mount]
-What = LABEL=my-usb-stick
+What = LABEL=V
 Where = /mnt/storage
-Type = ext4
+Type = fat
 Options = rw,relatime,data=ordered
 
 [Install]
