@@ -9,11 +9,14 @@ import picamera
 
 camera = picamera.PiCamera()
 
+date_fmt = "%Y%m%dT%H:%M:%S"
+
 
 def callback_up(channel):
     print("We detected something !")
     now = datetime.now()
-    filepath = "/mnt/storage/%s.jpg" % str(now)
+    now_str = now.strftime(date_fmt)
+    filepath = "/mnt/storage/%s.jpg" % str(now_str)
     camera.capture(filepath)
     time.sleep(5)
 
@@ -29,6 +32,3 @@ class App(object):
 
     def stop(self):
         print("Bye Bye")
-
-
-
