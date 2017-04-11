@@ -4,8 +4,8 @@ Description = External USB stick storage
 [Mount]
 What = LABEL=V
 Where = /mnt/storage
-Type = fat
-Options = rw,relatime,data=ordered
+Type = vfat
+Options = rw
 
 [Install]
 WantedBy = multi-user.target
