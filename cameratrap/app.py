@@ -8,7 +8,7 @@ import picamera
 
 camera = picamera.PiCamera()
 
-date_fmt = "%Y%m%dT%H:%M:%S"
+date_fmt = "%Y%m%dT%H%M%S"
 
 
 def callback_up(channel):
