@@ -1,5 +1,4 @@
 # -*- coding: utf8 -*-
-import logging
 from datetime import datetime
 import time
 
@@ -17,7 +16,8 @@ def callback_up(channel):
     now = datetime.now()
     now_str = now.strftime(date_fmt)
     filepath = "/mnt/storage/%s.jpg" % str(now_str)
-    camera.capture(filepath)
+    with open(filepath, 'wb') as f:
+        camera.capture(f)
     time.sleep(5)
 
 
